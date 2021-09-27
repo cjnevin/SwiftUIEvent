@@ -1,3 +1,3 @@
 # SwiftUIEvent
 
-[Redux|architecture-diagram.png]
+![Redux](architecture-diagram.png)
