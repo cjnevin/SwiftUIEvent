@@ -27,7 +27,7 @@ struct CitiesView: View {
                 send: CitiesAction.search
             ))
             .refreshable(action: {
-                await store.send(.refresh, while: \.isLoading)
+                await store.send(.refresh, while: \.isFetching)
             })
         }
     }

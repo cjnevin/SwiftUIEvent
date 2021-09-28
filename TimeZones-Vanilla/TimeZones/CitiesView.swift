@@ -18,7 +18,9 @@ struct CitiesView: View {
         NavigationView {
             List(filteredCities) { city in
                 CityView(city: city, isEditing: !searchText.isEmpty) {
-                    toggle(id: city.id)
+                    withAnimation {
+                        toggle(id: city.id)
+                    }
                 }
             }
             .navigationTitle("TimeZones")
@@ -34,9 +36,7 @@ struct CitiesView: View {
 
     func toggle(id: String) {
         if let index = allCities.firstIndex(where: { $0.id == id }) {
-            withAnimation {
-                allCities[index].favourite.toggle()
-            }
+            allCities[index].favourite.toggle()
         }
     }
 

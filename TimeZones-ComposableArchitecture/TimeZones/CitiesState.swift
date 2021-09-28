@@ -10,14 +10,14 @@ import ComposableArchitecture
 struct CitiesState: Equatable {
     var allCities: [City] = []
     var filteredCities: [City] = []
-    var isLoading: Bool = false
+    var isFetching: Bool = false
     var searchText: String = ""
 }
 
 enum CitiesAction {
     case refresh
     case fetch
-    case loaded([City])
+    case fetched([City])
     case search(`for`: String)
     case toggle(id: String)
 }
@@ -31,24 +31,24 @@ let citiesReducer = Reducer<CitiesState, CitiesAction, AppEnvironment> { state, 
 
     switch action {
     case .refresh:
-        state.isLoading = true
+        state.isFetching = true
         return environment.cities.refresh()
-            .map(CitiesAction.loaded)
+            .map(CitiesAction.fetched)
             .eraseToEffect()
 
     case .fetch:
-        state.isLoading = true
+        state.isFetching = true
         return environment.cities.fetch()
-            .map(CitiesAction.loaded)
+            .map(CitiesAction.fetched)
             .eraseToEffect()
 
-    case .loaded(var items):
+    case .fetched(var items):
         if !state.allCities.isEmpty {
             // Keep the favourites from the existing state
             items.copy(\.favourite, from: state.allCities)
         }
         state.allCities = items
-        state.isLoading = false
+        state.isFetching = false
 
     case .toggle(let id):
         if let index = state.allCities.firstIndex(where: { $0.id == id }) {
