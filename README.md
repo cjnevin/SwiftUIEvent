@@ -2,6 +2,9 @@
 
 ![Redux](architecture-diagram.png)
 
+I have written about why Redux is beneficial in the past, if you're interested please read this: 
+https://itnext.io/functional-architecture-e9031090ff18
+
 ## Composable Architecture 
 
 This framework enables us to write our apps in composable chunks, enabling teams to work entirely independently of one another on the same codebase.
